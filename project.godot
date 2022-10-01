@@ -8,11 +8,34 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Tile",
+"language": "GDScript",
+"path": "res://tile/tile.gd"
+} ]
+_global_script_class_icons={
+"Tile": ""
+}
+
 [application]
 
 config/name="Type Traveler"
-run/main_scene="res://main.tscn"
+run/main_scene="res://main/main.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+GameManager="*res://scripts/GameManager.gd"
+
+[debug]
+
+gdscript/warnings/integer_division=false
+
+[display]
+
+window/size/width=600
+window/size/height=800
 
 [editor]
 
@@ -40,4 +63,4 @@ common/enable_pause_aware_picking=true
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://main/default_env.tres"
