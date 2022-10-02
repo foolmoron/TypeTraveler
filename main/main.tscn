@@ -1,9 +1,14 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://main/tile_container.gd" type="Script" id=1]
-[ext_resource path="res://tile/tile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://main/time_label.gd" type="Script" id=3]
 [ext_resource path="res://main/ARIBLK.TTF" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=1]
 size = 242
@@ -19,32 +24,107 @@ rotating = true
 current = true
 
 [node name="TileContainer" type="Node2D" parent="."]
-position = Vector2( 0, 800 )
+position = Vector2( 0, 799 )
 script = ExtResource( 1 )
+lanes_active = 8
+spacing_y = 132
 
-[node name="Tile1" parent="TileContainer" instance=ExtResource( 2 )]
-position = Vector2( 37, 0 )
+[node name="Tiles" type="Node2D" parent="TileContainer"]
 
-[node name="Tile2" parent="TileContainer" instance=ExtResource( 2 )]
-position = Vector2( 112, -125 )
+[node name="Key6" type="Label" parent="TileContainer"]
+margin_top = -74.0
+margin_right = 75.0
+margin_bottom = 1.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 2 )
+text = "C"
+align = 1
+valign = 1
 
-[node name="Tile3" parent="TileContainer" instance=ExtResource( 2 )]
-position = Vector2( 187, -250 )
+[node name="Key4" type="Label" parent="TileContainer"]
+margin_left = 75.0
+margin_top = -74.0
+margin_right = 150.0
+margin_bottom = 1.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 2 )
+text = "A"
+align = 1
+valign = 1
 
-[node name="Tile4" parent="TileContainer" instance=ExtResource( 2 )]
-position = Vector2( 262, -375 )
+[node name="Key2" type="Label" parent="TileContainer"]
+margin_left = 150.0
+margin_top = -74.0
+margin_right = 225.0
+margin_bottom = 1.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 2 )
+text = "B"
+align = 1
+valign = 1
 
-[node name="Tile5" parent="TileContainer" instance=ExtResource( 2 )]
-position = Vector2( 337, -500 )
+[node name="Key0" type="Label" parent="TileContainer"]
+margin_left = 225.0
+margin_top = -74.0
+margin_right = 300.0
+margin_bottom = 1.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 2 )
+text = "C"
+align = 1
+valign = 1
 
-[node name="Tile6" parent="TileContainer" instance=ExtResource( 2 )]
-position = Vector2( 412, -625 )
+[node name="Key1" type="Label" parent="TileContainer"]
+margin_left = 300.0
+margin_top = -74.0
+margin_right = 375.0
+margin_bottom = 1.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 2 )
+text = "C"
+align = 1
+valign = 1
 
-[node name="Tile7" parent="TileContainer" instance=ExtResource( 2 )]
-position = Vector2( 487, -750 )
+[node name="Key3" type="Label" parent="TileContainer"]
+margin_left = 375.0
+margin_top = -74.0
+margin_right = 450.0
+margin_bottom = 1.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 2 )
+text = "C"
+align = 1
+valign = 1
 
-[node name="Tile8" parent="TileContainer" instance=ExtResource( 2 )]
-position = Vector2( 562, -875 )
+[node name="Key5" type="Label" parent="TileContainer"]
+margin_left = 450.0
+margin_top = -74.0
+margin_right = 525.0
+margin_bottom = 1.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 2 )
+text = "C"
+align = 1
+valign = 1
+
+[node name="Key7" type="Label" parent="TileContainer"]
+margin_left = 525.0
+margin_top = -74.0
+margin_right = 600.0
+margin_bottom = 1.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_fonts/font = SubResource( 2 )
+text = "C"
+align = 1
+valign = 1
 
 [node name="TimeLabel" type="Label" parent="."]
 margin_right = 4000.0
@@ -59,12 +139,3 @@ align = 1
 valign = 1
 clip_text = true
 script = ExtResource( 3 )
-
-[connection signal="pressed" from="TileContainer/Tile1" to="TileContainer" method="_on_Tile_pressed" flags=6]
-[connection signal="pressed" from="TileContainer/Tile2" to="TileContainer" method="_on_Tile_pressed" flags=6]
-[connection signal="pressed" from="TileContainer/Tile3" to="TileContainer" method="_on_Tile_pressed" flags=6]
-[connection signal="pressed" from="TileContainer/Tile4" to="TileContainer" method="_on_Tile_pressed" flags=6]
-[connection signal="pressed" from="TileContainer/Tile5" to="TileContainer" method="_on_Tile_pressed" flags=6]
-[connection signal="pressed" from="TileContainer/Tile6" to="TileContainer" method="_on_Tile_pressed" flags=6]
-[connection signal="pressed" from="TileContainer/Tile7" to="TileContainer" method="_on_Tile_pressed" flags=6]
-[connection signal="pressed" from="TileContainer/Tile8" to="TileContainer" method="_on_Tile_pressed" flags=6]

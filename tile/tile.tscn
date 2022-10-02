@@ -7,7 +7,7 @@
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="Curve" id=2]
-_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 1, Vector2( 0.285, 1 ), 0.0, -0.0445635, 1, 0, Vector2( 1, 0 ), -3.03719, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0119617, 0, 0, Vector2( 0.11, 0.995454 ), 0.0757578, 0.0, 0, 0, Vector2( 0.285, 1 ), 0.0259743, -0.0445635, 1, 0, Vector2( 1, 0 ), -3.03719, 0.0, 0, 0 ]
 
 [sub_resource type="Gradient" id=3]
 offsets = PoolRealArray( 0, 0.39548, 1 )
@@ -45,20 +45,32 @@ patch_margin_top = 25
 patch_margin_right = 25
 patch_margin_bottom = 25
 
+[node name="Border" type="NinePatchRect" parent="Container"]
+modulate = Color( 1, 1, 1, 0.462745 )
+margin_right = 75.0
+margin_bottom = 125.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 1 )
+patch_margin_left = 25
+patch_margin_top = 25
+patch_margin_right = 25
+patch_margin_bottom = 25
+
 [node name="Tween" type="Tween" parent="."]
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-position = Vector2( 0, -110 )
-amount = 20
-lifetime = 0.4
-randomness = 0.63
-lifetime_randomness = 0.48
-local_coords = false
-draw_order = 1
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 0, -102 )
+amount = 47
+lifetime = 0.6
+randomness = 0.52
+lifetime_randomness = 0.49
 texture = ExtResource( 3 )
 emission_shape = 2
-emission_rect_extents = Vector2( 20, 1 )
-gravity = Vector2( 0, 0 )
+emission_rect_extents = Vector2( 20, 10 )
+direction = Vector2( 0, -1 )
+gravity = Vector2( 0, -1200 )
 scale_amount = 0.19
 scale_amount_random = 0.06
 scale_amount_curve = SubResource( 2 )

@@ -2,10 +2,17 @@ extends Node
 
 signal seconds_updated(secs)
 
+func _ready():
+	randomize()
+
 var seconds = 0
+var age_of_universe_secs = date_to_secs(13800000000, 0, 0, 0, 0, 0)
 
 func add_seconds(secs: int):
+	var prev = seconds
 	seconds += secs
+	if seconds < prev:
+		seconds = age_of_universe_secs
 	emit_signal("seconds_updated", seconds)
 
 var start_secs = date_to_secs(2022, 9, 15, 0, 0, 0)
@@ -31,15 +38,30 @@ func secs_to_str(secs: int) -> String:
 		else:
 			return "%d AD" % [years]
 	else:
-		var years = -secs / 31104000
+		var years: float = -secs / 31104000
 		if years >= 10_000_000_000:
-			var k = years / 10_000_000_000
-			return "%dbil BC" % [k]
-		elif years >= 10_000_000:
-			var k = years / 10_000_000
-			return "%dmil BC" % [k]
-		elif years >= 10_000:
-			var k = years / 1_000
-			return "%dk BC" % [k]
+			var b = years / 1_000_000_000
+			return "%.2fbil BC" % [b]
+		elif years >= 1_000_000_000:
+			var m = int(years / 1_000_000)
+			if m > 1000:
+				return "%d,%dmil BC" % [m / 1000, m % 1000]
+			else:
+				return "%dmil BC" % [m]
+		elif years >= 1_000_000:
+			var k = int(years / 1_000)
+			if k > 1000:
+				return "%d,%dk BC" % [k / 1000, k % 1000]
+			else:
+				return "%dk BC" % [k]
 		else:
-			return "%d BC" % [years]
+			var y = int(years)
+			if y > 1000:
+				return "%d,%d BC" % [y / 1000, y % 1000]
+			else:
+				return "%d BC" % [y]
+
+export(int, 1, 20) var lives = 5
+func report_mistake():
+	lives -= 1
+	print("Player made mistake! Lives left: %s" % [lives])
