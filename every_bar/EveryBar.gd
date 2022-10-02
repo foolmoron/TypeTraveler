@@ -11,7 +11,7 @@ func _ready():
 
 
 func _process(delta):
-	if GameManager.level > 1:
+	if not GameManager.gameover and GameManager.level > 1:
 		time_left -= delta
 
 	var time_left_perc = time_left / max_time_left

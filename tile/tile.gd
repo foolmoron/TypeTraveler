@@ -24,6 +24,13 @@ func _process(_delta):
 	# special
 	$Special.visible = is_special
 
+func set_color(c: Color):
+	c.v = 1
+	$Container/Sprite.modulate = c
+	var prev_v = $Container/Border.modulate.v
+	$Container/Border.modulate = c
+	$Container/Border.modulate.v = prev_v
+	$CPUParticles2D.modulate = c
 
 func move_down_to(y):
 	$Tween.interpolate_property(self, "position:y", null, y, move_to_target_time, Tween.TRANS_CIRC, Tween.EASE_OUT)

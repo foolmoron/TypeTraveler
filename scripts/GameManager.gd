@@ -13,7 +13,7 @@ func _ready():
 	secs_increment_base = 10
 	level = 1
 	start_secs = date_to_secs(2022, 9, 15, 12, 0, 0)
-	lives = 1
+	lives = 5
 
 var gameover = false
 

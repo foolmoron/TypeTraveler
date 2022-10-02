@@ -76,21 +76,32 @@ size_flags_vertical = 3
 action_mode = 0
 flat = true
 
-[node name="Sprite" type="NinePatchRect" parent="Container"]
+[node name="Border" type="NinePatchRect" parent="Container"]
+modulate = Color( 0.55, 0.55, 0.55, 1 )
 margin_right = 75.0
 margin_bottom = 125.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 1 )
+draw_center = false
 patch_margin_left = 25
 patch_margin_top = 25
 patch_margin_right = 25
 patch_margin_bottom = 25
 
-[node name="Border" type="NinePatchRect" parent="Container"]
-modulate = Color( 1, 1, 1, 0.462745 )
+[node name="Sprite" type="MarginContainer" parent="Container"]
 margin_right = 75.0
 margin_bottom = 125.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="tex" type="NinePatchRect" parent="Container/Sprite"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 71.0
+margin_bottom = 121.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 1 )
