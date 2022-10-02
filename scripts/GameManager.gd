@@ -1,20 +1,29 @@
 extends Node
 
 signal seconds_updated(secs)
+signal level_updated(level)
 
 func _ready():
 	randomize()
 
 var seconds = 0
-var secs_increment = 10
 var age_of_universe_secs = date_to_secs(13800000000, 1, 1, 0, 0, 0)
 
-func boost_increment():
-	secs_increment *= 10
+var secs_increment_base = 10
+var level = 1
+const max_level = 18
+
+func boost_level():
+	level += 1
+	emit_signal("level_updated", level)
+
+func drop_level():
+	level -= 1
+	emit_signal("level_updated", level)
 
 func add_seconds():
 	var prev = seconds
-	seconds += secs_increment
+	seconds += int(pow(secs_increment_base, level))
 	if seconds < prev:
 		seconds = age_of_universe_secs
 	seconds = min(seconds, age_of_universe_secs)

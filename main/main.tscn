@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://main/tile_container.gd" type="Script" id=1]
+[ext_resource path="res://every_bar/EveryBar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://main/time_label.gd" type="Script" id=3]
 [ext_resource path="res://main/ARIBLK.TTF" type="DynamicFontData" id=4]
 
@@ -124,6 +125,12 @@ custom_fonts/font = SubResource( 2 )
 text = "C"
 align = 1
 valign = 1
+
+[node name="EveryBar" parent="." instance=ExtResource( 2 )]
+margin_top = 48.0
+margin_bottom = 48.0
+time_left_initial = 6.0
+time_left_final = 3.0
 
 [node name="TimeLabel" type="Label" parent="."]
 margin_right = 4000.0

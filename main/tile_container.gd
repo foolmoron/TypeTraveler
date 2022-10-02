@@ -74,7 +74,7 @@ func new_tile():
 	$Tiles.move_child(tile, 0)
 
 	_tiles_since_special += 1
-	if _tiles_since_special >= special_freq:
+	if _tiles_since_special >= special_freq && GameManager.level < GameManager.max_level:
 		_tiles_since_special = 0
 		tile.is_special = true
 
@@ -82,7 +82,7 @@ func new_tile():
 
 func _on_Tile_pressed(pressed_tile: Tile):
 	if pressed_tile.is_special:
-		GameManager.boost_increment()
+		GameManager.boost_level()
 	else:
 		GameManager.add_seconds()
 	remove_tile(pressed_tile)
