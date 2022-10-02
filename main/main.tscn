@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://main/tile_container.gd" type="Script" id=1]
 [ext_resource path="res://every_bar/EveryBar.tscn" type="PackedScene" id=2]
@@ -329,6 +329,18 @@ outline_size = 10
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
+[sub_resource type="DynamicFont" id=10]
+size = 402
+outline_size = 10
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 119
+outline_size = 10
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
 [node name="Main" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -559,5 +571,82 @@ bus = "New Bus 7"
 
 [node name="AudioStreamPlayer8" type="AudioStreamPlayer" parent="Audios"]
 bus = "New Bus 8"
+
+[node name="Start" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Start"]
+margin_right = 601.0
+margin_bottom = 121.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="Start"]
+margin_top = 681.0
+margin_right = 601.0
+margin_bottom = 802.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Label" type="Label" parent="Start"]
+margin_left = 6.0
+margin_top = 228.0
+margin_right = 4006.0
+margin_bottom = 570.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.15, 0.15 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 29
+custom_constants/shadow_offset_y = 16
+custom_fonts/font = SubResource( 10 )
+text = "Type Traveler"
+align = 1
+valign = 1
+clip_text = true
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Label2" type="Label" parent="Start"]
+margin_left = 6.0
+margin_top = 190.0
+margin_right = 4006.0
+margin_bottom = 532.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.15, 0.15 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 13
+custom_constants/shadow_offset_y = 11
+custom_fonts/font = SubResource( 11 )
+text = "by @foolmoron w/ RVA Game Jams
+for Ludum Dare 51"
+align = 1
+valign = 1
+clip_text = true
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Label3" type="Label" parent="Start"]
+margin_left = 6.0
+margin_top = 488.0
+margin_right = 4006.0
+margin_bottom = 830.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.15, 0.15 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 13
+custom_constants/shadow_offset_y = 11
+custom_fonts/font = SubResource( 11 )
+text = "PRESS any key or CLICK/TAP to START"
+align = 1
+valign = 1
+clip_text = true
+__meta__ = {
+"_editor_description_": ""
+}
 
 [connection signal="pressed" from="TileContainer/MistakeButton" to="TileContainer" method="_on_MistakeButton_pressed"]

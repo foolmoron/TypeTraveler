@@ -161,7 +161,5 @@ func _on_Button_pressed():
 			7:7,
 		}[lane]
 		var sound = era_sounds[era][index]
-		GameManager.audio_bus_index = (GameManager.audio_bus_index + 1) % 8
-		GameManager.audio_buses[GameManager.audio_bus_index].stream = sound
-		GameManager.audio_buses[GameManager.audio_bus_index].play()
+		GameManager.play_sound(sound)
 

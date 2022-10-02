@@ -5,11 +5,11 @@ signal level_updated(level)
 signal era_updated(era)
 
 var audio_bus_index = 0
-var audio_buses: Array
 
 func _ready():
 	randomize()
-	audio_buses = $"../Main/Audios".get_children()
+	$"../Main/TileContainer".set_process(false)
+	started = false
 	gameover = false
 	seconds = 0
 	age_of_universe_secs = date_to_secs(13800000000, 1, 1, 0, 0, 0)
@@ -17,9 +17,10 @@ func _ready():
 	secs_increment_base = 10
 	level = 1
 	start_secs = date_to_secs(2022, 9, 15, 12, 0, 0)
-	lives = 5
+	lives = 1
 	grace = true
 
+var started = false
 var gameover = false
 
 var grace = true
@@ -157,7 +158,19 @@ func with_commas(n: int) -> String:
 	return s
 
 func _input(evt):
+	if not started:
+		if (evt is InputEventKey and evt.pressed) or (evt is InputEventMouseButton and evt.pressed):
+			started = true
+			$"../Main/TileContainer".set_process(true)
+			$"../Main/Start".get_parent().remove_child($"../Main/Start")
+
 	if gameover and evt is InputEventKey and evt.pressed and evt.scancode == KEY_ENTER:
-		_ready()
 		var _err = get_tree().reload_current_scene()
+		_ready()
 		return
+
+func play_sound(sound: AudioStreamSample):
+	var audio_buses = $"../Main/Audios".get_children()
+	audio_bus_index = (audio_bus_index + 1) % 8
+	audio_buses[audio_bus_index].stream = sound
+	audio_buses[audio_bus_index].play()
