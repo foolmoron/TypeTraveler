@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://roundedsquare.png" type="Texture" id=1]
 [ext_resource path="res://tile/tile.gd" type="Script" id=2]
 [ext_resource path="res://circle.png" type="Texture" id=3]
+[ext_resource path="res://main/ARIBLK.TTF" type="DynamicFontData" id=4]
+[ext_resource path="res://tile/10x.tres" type="Animation" id=5]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -13,7 +15,47 @@ _data = [ Vector2( 0, 0 ), 0.0, 0.0119617, 0, 0, Vector2( 0.11, 0.995454 ), 0.07
 offsets = PoolRealArray( 0, 0.39548, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
+[sub_resource type="DynamicFont" id=5]
+size = 90
+outline_size = 6
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Special:scale:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0.375, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Special:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0.375, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Special:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.1, -15.0414, 0.3, 16.7739 ),
+"times": PoolRealArray( 0 )
+}
+
 [node name="Tile" type="Node2D"]
+position = Vector2( 0.085, 0 )
 script = ExtResource( 2 )
 move_to_target_time = 0.21
 
@@ -75,5 +117,24 @@ scale_amount = 0.19
 scale_amount_random = 0.06
 scale_amount_curve = SubResource( 2 )
 color_ramp = SubResource( 3 )
+
+[node name="Special" type="Node2D" parent="."]
+position = Vector2( -0.085, -95 )
+scale = Vector2( 0.375, 0.375 )
+
+[node name="10x" type="Label" parent="Special"]
+margin_left = -90.3688
+margin_top = -68.2787
+margin_right = 89.6312
+margin_bottom = 59.7213
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 5 )
+text = "10x"
+align = 1
+valign = 1
+
+[node name="SpecialAnim" type="AnimationPlayer" parent="."]
+anims/10x = ExtResource( 5 )
+anims/RESET = SubResource( 6 )
 
 [connection signal="pressed" from="Container/Button" to="." method="_on_Button_pressed"]

@@ -6,6 +6,9 @@ export var spacing_y = 125
 
 export(int, 1, 5) var rand_decks = 3
 
+export(int, 1, 30) var special_freq = 10
+var _tiles_since_special = 0
+
 const keys = [KEY_F, KEY_J]
 
 const next_key_map = {
@@ -70,11 +73,18 @@ func new_tile():
 	$Tiles.add_child(tile)
 	$Tiles.move_child(tile, 0)
 
-var _tilesPressed = 0
+	_tiles_since_special += 1
+	if _tiles_since_special >= special_freq:
+		_tiles_since_special = 0
+		tile.is_special = true
+
+	return tile
 
 func _on_Tile_pressed(pressed_tile: Tile):
-	_tilesPressed += 1
-	GameManager.add_seconds(int(pow(10, _tilesPressed)))
+	if pressed_tile.is_special:
+		GameManager.boost_increment()
+	else:
+		GameManager.add_seconds()
 
 	$Tiles.remove_child(pressed_tile)
 

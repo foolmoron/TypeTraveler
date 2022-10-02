@@ -8,9 +8,11 @@ var target_y = 0
 
 export(int, 0, 7) var lane = -1
 export var is_next = false
+export var is_special = false
 
 func _ready():
 	target_y = position.y
+	$SpecialAnim.play("10x")
 
 func _process(_delta):
 	# particles on move
@@ -18,6 +20,10 @@ func _process(_delta):
 
 	# dull when not active
 	modulate.v = 1.0 if is_next else 0.65
+
+	# special
+	$Special.visible = is_special
+
 
 func move_down_to(y):
 	$Tween.interpolate_property(self, "position:y", null, y, move_to_target_time, Tween.TRANS_CIRC, Tween.EASE_OUT)

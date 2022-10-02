@@ -1,0 +1,36 @@
+[gd_resource type="Animation" format=2]
+
+[resource]
+resource_name = "10x"
+length = 1.5
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Special:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.1, 6.05715, 19.1182, -0.25, 0, 0.25, 0, -20.3998, -0.25, 0, 0.25, 0, 0, -0.1, -15.0414, 0.3, 16.7739 ),
+"times": PoolRealArray( 0, 0.4, 1.1, 1.5 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Special:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0.375, -0.25, 0, 0.25, 0, 0.525, -0.25, 0, 0.25, 0, 0.375, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.9, 1.5 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Special:scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0.375, -0.25, 0, 0.25, 0, 0.525, -0.25, 0, 0.25, 0, 0.375, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7, 1.5 )
+}
