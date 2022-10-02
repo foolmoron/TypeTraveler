@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/anc6.wav-9ff56859d8bbd3c2b8ea42162021e788.sample"
+
+[deps]
+
+source_file="res://sounds/anc6.wav"
+dest_files=[ "res://.import/anc6.wav-9ff56859d8bbd3c2b8ea42162021e788.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

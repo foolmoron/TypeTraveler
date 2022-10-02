@@ -4,8 +4,12 @@ signal seconds_updated(secs)
 signal level_updated(level)
 signal era_updated(era)
 
+var audio_bus_index = 0
+var audio_buses: Array
+
 func _ready():
 	randomize()
+	audio_buses = $"../Main/Audios".get_children()
 	gameover = false
 	seconds = 0
 	age_of_universe_secs = date_to_secs(13800000000, 1, 1, 0, 0, 0)
@@ -14,8 +18,11 @@ func _ready():
 	level = 1
 	start_secs = date_to_secs(2022, 9, 15, 12, 0, 0)
 	lives = 5
+	grace = true
 
 var gameover = false
+
+var grace = true
 
 var seconds = 0
 var age_of_universe_secs = date_to_secs(13800000000, 1, 1, 0, 0, 0)
@@ -46,7 +53,7 @@ func drop_level():
 
 func add_seconds():
 	var prev = seconds
-	seconds += int(pow(secs_increment_base, level) * rand_range(1.0000, 1.0005)) # tiny extra rand gives nicer scores at the end
+	seconds += int(pow(secs_increment_base, level) * rand_range(1.001, 1.004)) # tiny extra rand gives nicer scores at the end
 	if seconds < prev:
 		seconds = age_of_universe_secs
 	seconds = min(seconds, age_of_universe_secs)
@@ -115,6 +122,7 @@ func secs_to_str(secs: int) -> String:
 
 var lives = 5
 func report_mistake():
+	$"../Main/MistakeAudio".play()
 	lives -= 1
 	if lives > 0:
 		$"../Main/TileContainer/MistakesLabel".text = "MISTAKES LEFT: %s" % [lives]

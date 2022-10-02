@@ -39,17 +39,6 @@ const era_texts = [
 	"Cradle of Time",
 ]
 
-const era_colors = [
-	Color.deepskyblue,
-	Color.hotpink,
-	Color.mediumspringgreen,
-	Color.olive,
-	Color.goldenrod,
-	Color.firebrick,
-	Color.floralwhite,
-	Color.indigo,
-]
-
 func _ready():
 	# init era
 	var _err = GameManager.connect("era_updated", self, "_on_GameManager_era_updated")
@@ -99,7 +88,6 @@ func new_tile():
 	var lane = randi() % lanes_active
 	tile.position = Vector2(lane_positions[lane], spawn_y)
 	tile.lane = lane
-	tile.set_color(era_colors[GameManager.era])
 	var _err = tile.connect("pressed", self, "_on_Tile_pressed")
 	$Tiles.add_child(tile)
 	$Tiles.move_child(tile, 0)
@@ -148,9 +136,14 @@ func _input(evt):
 			GameManager.report_mistake()
 
 func _on_GameManager_era_updated(era):
-	lanes_active = 2 + era
+	lanes_active = min(8, 2 + era)
 	get_node("../EraLabel").text = era_texts[era]
 	do_keys()
 
 func _on_MistakeButton_pressed():
-	GameManager.report_mistake()
+	if GameManager.grace:
+		GameManager.grace = false
+		return
+	else:
+		GameManager.report_mistake()
+		GameManager.grace = true
