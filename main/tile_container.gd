@@ -11,7 +11,7 @@ var _tiles_since_special = 0
 
 export var frozen = false
 
-const keys = [KEY_F, KEY_J]
+var keys = [KEY_F, KEY_J]
 
 const next_key_map = {
 	KEY_F: [KEY_E, KEY_C],
@@ -151,3 +151,6 @@ func _on_GameManager_era_updated(era):
 	lanes_active = 2 + era
 	get_node("../EraLabel").text = era_texts[era]
 	do_keys()
+
+func _on_MistakeButton_pressed():
+	GameManager.report_mistake()

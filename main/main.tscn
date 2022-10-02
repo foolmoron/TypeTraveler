@@ -341,6 +341,11 @@ script = ExtResource( 1 )
 spacing_y = 132
 special_freq = 20
 
+[node name="MistakeButton" type="Button" parent="TileContainer"]
+margin_top = -800.0
+margin_right = 600.0
+flat = true
+
 [node name="Tiles" type="Node2D" parent="TileContainer"]
 
 [node name="Key6" type="Label" parent="TileContainer"]
@@ -522,3 +527,5 @@ text = "Cradle of Time Era"
 align = 1
 valign = 1
 clip_text = true
+
+[connection signal="pressed" from="TileContainer/MistakeButton" to="TileContainer" method="_on_MistakeButton_pressed"]

@@ -65,6 +65,7 @@ margin_left = -37.0
 margin_top = -125.0
 margin_right = 38.0
 rect_pivot_offset = Vector2( 37, 125 )
+mouse_filter = 2
 custom_styles/panel = SubResource( 1 )
 
 [node name="Button" type="Button" parent="Container"]
@@ -92,6 +93,7 @@ patch_margin_bottom = 25
 [node name="Sprite" type="MarginContainer" parent="Container"]
 margin_right = 75.0
 margin_bottom = 125.0
+mouse_filter = 2
 custom_constants/margin_right = 4
 custom_constants/margin_top = 4
 custom_constants/margin_left = 4

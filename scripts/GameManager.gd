@@ -46,7 +46,7 @@ func drop_level():
 
 func add_seconds():
 	var prev = seconds
-	seconds += int(pow(secs_increment_base, level))
+	seconds += int(pow(secs_increment_base, level) * rand_range(1.0000, 1.0005)) # tiny extra rand gives nicer scores at the end
 	if seconds < prev:
 		seconds = age_of_universe_secs
 	seconds = min(seconds, age_of_universe_secs)
