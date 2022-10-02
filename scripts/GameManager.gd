@@ -6,14 +6,25 @@ signal era_updated(era)
 
 func _ready():
 	randomize()
+	gameover = false
+	seconds = 0
+	age_of_universe_secs = date_to_secs(13800000000, 1, 1, 0, 0, 0)
+	era = 0
+	secs_increment_base = 10
+	level = 1
+	start_secs = date_to_secs(2022, 9, 15, 12, 0, 0)
+	lives = 1
+
+var gameover = false
 
 var seconds = 0
 var age_of_universe_secs = date_to_secs(13800000000, 1, 1, 0, 0, 0)
 
 var era = 0
 const eras = [
+	2022.705,
+	2022,
 	2000,
-	1750,
 	0,
 	-10_000,
 	-10_000_000,
@@ -23,7 +34,7 @@ const eras = [
 
 var secs_increment_base = 10
 var level = 1
-const max_level = 18
+const max_level = 15
 
 func boost_level():
 	level += 1
@@ -41,7 +52,7 @@ func add_seconds():
 	seconds = min(seconds, age_of_universe_secs)
 	emit_signal("seconds_updated", seconds)
 
-	var years = (start_secs - seconds) / 31104000
+	var years = float(start_secs - seconds) / 31104000
 	var new_era = 0
 	for i in eras.size():
 		if years >= eras[i]:
@@ -71,7 +82,9 @@ func secs_to_str(secs: int) -> String:
 		var minutes = secs / 60
 		secs -= minutes * 60
 		if years >= 2022 and (months + 1) >= 9 and (days + 1) >= 15:
-			return "Today @ %0*d:%0*d:%0*d" % [2, hours, 2, minutes, 2, secs]
+			return "Today %0*d:%0*d:%0*d" % [2, hours, 2, minutes, 2, secs]
+		elif years >= 2022 and (months + 1) >= 9 and (days + 1) >= 14:
+			return "Yesterday %0*d:%0*d:%0*d" % [2, hours, 2, minutes, 2, secs]
 		elif years >= 2000:
 			return "%d-%0*d-%0*d" % [years, 2, months + 1, 2, days + 1]
 		else:
@@ -100,7 +113,43 @@ func secs_to_str(secs: int) -> String:
 			else:
 				return "%d BC" % [y]
 
-export(int, 1, 20) var lives = 5
+var lives = 5
 func report_mistake():
 	lives -= 1
-	print("Player made mistake! Lives left: %s" % [lives])
+	if lives > 0:
+		$"../Main/TileContainer/MistakesLabel".text = "MISTAKES LEFT: %s" % [lives]
+		$"../Main/TileContainer/MalfunctionAnim".play("Malfunction")
+	else:
+		var file = File.new()
+		if not file.file_exists("user://highscore.dat"):
+			file.open("user://highscore.dat", File.WRITE)
+			file.store_64(0)
+			file.close()
+		file.open("user://highscore.dat", File.READ)
+		var best = max(file.get_64(), seconds)
+		file.close()
+		file.open("user://highscore.dat", File.WRITE)
+		file.store_64(best)
+		file.close()
+		$"../Main/TileContainer/Malfunction/Label".text = $"../Main/TileContainer/Malfunction/Label".text.replace("MALFUNCTION", "JOURNEY OVER")
+		$"../Main/TileContainer/ScoreLabel".text = "Seconds lasted:\n%s\n\nBest seconds:\n%s\n\n\nPress ENTER to RESTART" % [with_commas(seconds), with_commas(best)]
+		$"../Main/TileContainer/MalfunctionAnim".play("GameOver")
+		gameover = true
+
+func with_commas(n: int) -> String:
+	if n == 0:
+		return "0"
+	var s = ""
+	while n > 0:
+		if (n / 1000) > 0:
+			s = (",%0*d" % [3, n % 1000]) + s
+		else:
+			s = str(n % 1000) + s
+		n /= 1000
+	return s
+
+func _input(evt):
+	if gameover and evt is InputEventKey and evt.pressed and evt.scancode == KEY_ENTER:
+		_ready()
+		var _err = get_tree().reload_current_scene()
+		return

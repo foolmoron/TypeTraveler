@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://main/tile_container.gd" type="Script" id=1]
 [ext_resource path="res://every_bar/EveryBar.tscn" type="PackedScene" id=2]
@@ -11,13 +11,324 @@ outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
+[sub_resource type="Animation" id=9]
+resource_name = "GameOver"
+length = 1.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Malfunction:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:frozen")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Malfunction:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -148, -216 ), Vector2( -197, -232 ), Vector2( -83, -236 ), Vector2( -65, -206 ), Vector2( -47, -240 ), Vector2( -171, -237 ), Vector2( -129, -153 ), Vector2( -48, -170 ), Vector2( -134, -229 ) ]
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Malfunction:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.0269241, -0.495213, -0.0193425, -0.0389761, 0.44551, 0.0534788, 0.52413, 1.03765, -0.045321, -0.489188, 0.0326312, -0.375626, -0.00187153, -0.0480403, 0.44551, 0.0362568, 0.515394, 1.02018, -0.0262862, -0.323214, 0.701596, -0.0131032 ),
+"times": PoolRealArray( 0, 0.4, 0.467713, 0.571951, 0.658968, 0.741452 )
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("MalfunctionColor:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ScoreLabel:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Malfunction"
+length = 1.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Malfunction:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:frozen")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Malfunction:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Vector2( -148, -216 ), Vector2( -197, -232 ), Vector2( -83, -236 ), Vector2( -65, -206 ), Vector2( -47, -240 ), Vector2( -171, -237 ), Vector2( -129, -153 ), Vector2( -48, -170 ), Vector2( -134, -229 ) ]
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Malfunction:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.0269241, -0.495213, -0.0193425, -0.0389761, 0.44551, 0.0534788, 0.52413, 1.03765, -0.045321, -0.489188, 0.0326312, -0.375626, -0.00187153, -0.0480403, 0.44551, 0.0362568, 0.515394, 1.02018, -0.0262862, -0.323214, 0.701596, -0.0131032, 0.00686395, -0.0836748, 1.08757, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4, 0.467713, 0.571951, 0.658968, 0.741452, 1.47709 )
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("MalfunctionColor:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("MistakesLabel:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Malfunction:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:frozen")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Malfunction:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( -148, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Malfunction:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( -216, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Malfunction:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -148, -216 ) ]
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Malfunction:modulate:r")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("Malfunction:modulate:g")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("Malfunction:modulate:b")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("Malfunction:modulate:a")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("MalfunctionColor:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("MistakesLabel:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("ScoreLabel:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="DynamicFont" id=5]
+size = 83
+outline_size = 9
+outline_color = Color( 1, 0.290196, 0.290196, 1 )
+extra_spacing_bottom = -64
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 55
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_bottom = -64
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 34
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
 [sub_resource type="DynamicFont" id=1]
 size = 242
 outline_size = 10
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="DynamicFont" id=6]
+size = 123
+outline_size = 10
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[node name="Main" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 300, 400 )
@@ -127,9 +438,60 @@ text = "C"
 align = 1
 valign = 1
 
+[node name="MalfunctionAnim" type="AnimationPlayer" parent="TileContainer"]
+anims/GameOver = SubResource( 9 )
+anims/Malfunction = SubResource( 3 )
+anims/RESET = SubResource( 4 )
+
+[node name="MalfunctionColor" type="ColorRect" parent="TileContainer"]
+visible = false
+margin_top = -800.0
+margin_right = 600.0
+color = Color( 1, 0.0117647, 0.0117647, 0.309804 )
+
+[node name="Malfunction" type="Node2D" parent="TileContainer"]
+visible = false
+position = Vector2( -148, -216 )
+rotation = -0.660839
+scale = Vector2( 1.06777, 1.06777 )
+
+[node name="Label" type="Label" parent="TileContainer/Malfunction"]
+margin_left = -1.6037
+margin_top = -1.19525
+margin_right = 604.396
+margin_bottom = 102.805
+custom_fonts/font = SubResource( 5 )
+text = "MALFUNCTION
+     MALFUNCTION
+MALFUNCTION
+  MALFUNCTION
+"
+
+[node name="MistakesLabel" type="Label" parent="TileContainer"]
+visible = false
+margin_left = 15.0
+margin_top = -691.0
+margin_right = 841.0
+margin_bottom = -409.0
+custom_fonts/font = SubResource( 7 )
+text = "MISTAKES LEFT: 3"
+
+[node name="ScoreLabel" type="Label" parent="TileContainer"]
+visible = false
+margin_top = -677.0
+margin_right = 600.0
+margin_bottom = -395.0
+custom_fonts/font = SubResource( 8 )
+text = "Seconds lasted:
+311040000000000000
+
+Best seconds:
+311040000000000000"
+align = 1
+
 [node name="EveryBar" parent="." instance=ExtResource( 2 )]
-margin_top = 48.0
-margin_bottom = 48.0
+margin_top = 66.0
+margin_bottom = 66.0
 time_left_initial = 8.0
 time_left_final = 16.0
 
@@ -146,3 +508,17 @@ align = 1
 valign = 1
 clip_text = true
 script = ExtResource( 3 )
+
+[node name="EraLabel" type="Label" parent="."]
+margin_top = 32.0
+margin_right = 4000.0
+margin_bottom = 374.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_scale = Vector2( 0.15, 0.15 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 6 )
+text = "Cradle of Time Era"
+align = 1
+valign = 1
+clip_text = true

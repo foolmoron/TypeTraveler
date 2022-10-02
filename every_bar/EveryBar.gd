@@ -44,9 +44,6 @@ const level_texts = [
 	"Every 10tril seconds (317k years)",
 	"Every 100tril seconds (3171k years)",
 	"Every 1000tril seconds (32m years)",
-	"Every 10quad seconds (317m years)",
-	"Every 100quad seconds (3171m years)",
-	"Every 1000quad seconds (32b years)",
 ]
 
 func _on_GameManager_level_updated(level):

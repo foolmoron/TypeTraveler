@@ -9,6 +9,8 @@ export(int, 1, 5) var rand_decks = 3
 export(int, 1, 30) var special_freq = 10
 var _tiles_since_special = 0
 
+export var frozen = false
+
 const keys = [KEY_F, KEY_J]
 
 const next_key_map = {
@@ -26,8 +28,21 @@ const next_key_map = {
 	KEY_O: [KEY_P],
 }
 
+const era_texts = [
+	"Journey Beginnings",
+	"Modern Era",
+	"Information Era",
+	"Agri-Industrial Era",
+	"Ancient Era",
+	"Prehistoric Era",
+	"Genesis",
+	"Cradle of Time",
+]
+
 func _ready():
+	# init era
 	var _err = GameManager.connect("era_updated", self, "_on_GameManager_era_updated")
+	get_node("../EraLabel").text = era_texts[0]
 
 	# init tiles
 	for _i in range(8):
@@ -85,6 +100,9 @@ func new_tile():
 	return tile
 
 func _on_Tile_pressed(pressed_tile: Tile):
+	if frozen:
+		return
+
 	if pressed_tile.is_special:
 		GameManager.boost_level()
 	else:
@@ -107,14 +125,17 @@ func remove_tile(tile: Tile):
 	get_node("Key" + str(next_tile.lane)).modulate.v = 1
 
 func _input(evt):
+	if frozen:
+		return
+
 	if evt is InputEventKey and evt.pressed:
 		var next_tile = $Tiles.get_child($Tiles.get_child_count() - 1) as Tile
 		if evt.scancode == keys[next_tile.lane]:
 			next_tile._on_Button_pressed()
 		elif evt.scancode in keys:
-			remove_tile(next_tile)
 			GameManager.report_mistake()
 
 func _on_GameManager_era_updated(era):
 	lanes_active = 2 + era
+	get_node("../EraLabel").text = era_texts[era]
 	do_keys()
