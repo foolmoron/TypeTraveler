@@ -85,20 +85,21 @@ func _on_Tile_pressed(pressed_tile: Tile):
 		GameManager.boost_increment()
 	else:
 		GameManager.add_seconds()
+	remove_tile(pressed_tile)
 
-	$Tiles.remove_child(pressed_tile)
+func remove_tile(tile: Tile):
+	$Tiles.remove_child(tile)
 
 	for i in $Tiles.get_child_count():
-		var t =  $Tiles.get_child_count() - 1 - i
-		var tile = $Tiles.get_child(t)
-		if tile is Tile:
-			tile.move_down_to(-i * spacing_y)
+		var t = $Tiles.get_child($Tiles.get_child_count() - 1 - i)
+		if t is Tile:
+			t.move_down_to(-i * spacing_y)
 
 	new_tile()
 
 	var next_tile = $Tiles.get_child($Tiles.get_child_count() - 1) as Tile
 	next_tile.is_next = true
-	get_node("Key" + str(pressed_tile.lane)).modulate.v = 0.33
+	get_node("Key" + str(tile.lane)).modulate.v = 0.33
 	get_node("Key" + str(next_tile.lane)).modulate.v = 1
 
 func _input(evt):
@@ -107,4 +108,5 @@ func _input(evt):
 		if evt.scancode == keys[next_tile.lane]:
 			next_tile._on_Button_pressed()
 		elif evt.scancode in keys:
+			remove_tile(next_tile)
 			GameManager.report_mistake()

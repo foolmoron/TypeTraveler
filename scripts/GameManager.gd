@@ -7,7 +7,7 @@ func _ready():
 
 var seconds = 0
 var secs_increment = 10
-var age_of_universe_secs = date_to_secs(13800000000, 0, 0, 0, 0, 0)
+var age_of_universe_secs = date_to_secs(13800000000, 1, 1, 0, 0, 0)
 
 func boost_increment():
 	secs_increment *= 10
@@ -20,28 +20,30 @@ func add_seconds():
 	seconds = min(seconds, age_of_universe_secs)
 	emit_signal("seconds_updated", seconds)
 
-var start_secs = date_to_secs(2022, 9, 15, 0, 0, 0)
+var start_secs = date_to_secs(2022, 9, 15, 12, 0, 0)
 
 func date_to_secs(year: int, month: int, day: int, hour: int, minute: int, sec: int) -> int:
-	return sec + minute * 60 + hour * 3600 + day * 86400 + month * 2592000 + year * 31104000
+	return sec + minute * 60 + hour * 3600 + (day - 1) * 86400 + (month - 1) * 2592000 + year * 31104000
 
 func secs_to_str(secs: int) -> String:
 	secs = start_secs - secs
 	if secs > 0:
 		var years = secs / 31104000
-		if years >= 2000:
-			secs -= years * 31104000
-			var months = secs / 2592000
-			secs -= months * 2592000
-			var days = secs / 86400
-			secs -= days * 86400
-			var hours = secs / 3600
-			secs -= hours * 3600
-			var minutes = secs / 60
-			secs -= minutes * 60
-			return "%d-%0*d-%0*d %0*d:%0*d:%0*d" % [years, 2, months, 2, days, 2, hours, 2, minutes, 2, secs]
+		secs -= years * 31104000
+		var months = secs / 2592000
+		secs -= months * 2592000
+		var days = secs / 86400
+		secs -= days * 86400
+		var hours = secs / 3600
+		secs -= hours * 3600
+		var minutes = secs / 60
+		secs -= minutes * 60
+		if years >= 2022 and (months + 1) >= 9 and (days + 1) >= 15:
+			return "Today @ %0*d:%0*d:%0*d" % [2, hours, 2, minutes, 2, secs]
+		elif years >= 2000:
+			return "%d-%0*d-%0*d" % [years, 2, months + 1, 2, days + 1]
 		else:
-			return "%d AD" % [years]
+			return "%d" % [years]
 	else:
 		var years: float = -secs / 31104000
 		if years >= 10_000_000_000:
