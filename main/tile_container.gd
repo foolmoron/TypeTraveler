@@ -27,6 +27,8 @@ const next_key_map = {
 }
 
 func _ready():
+	var _err = GameManager.connect("era_updated", self, "_on_GameManager_era_updated")
+
 	# init tiles
 	for _i in range(8):
 		new_tile()
@@ -39,13 +41,15 @@ func _ready():
 		key.text = OS.get_scancode_string(keys[i]) if  i < keys.size() else ""
 		key.modulate.v = 0.33
 	get_node("Key" + str(next_tile.lane)).modulate.v = 1
+	do_keys()
+
+func do_keys():
 	while keys.size() < lanes_active:
 		var prev_key = keys[keys.size() - 2]
 		var next_keys = next_key_map[prev_key]
 		var next_key = next_keys[randi() % next_keys.size()]
 		get_node("Key" + str(keys.size())).text = OS.get_scancode_string(next_key)
 		keys.append(next_key)
-
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -110,3 +114,7 @@ func _input(evt):
 		elif evt.scancode in keys:
 			remove_tile(next_tile)
 			GameManager.report_mistake()
+
+func _on_GameManager_era_updated(era):
+	lanes_active = 2 + era
+	do_keys()

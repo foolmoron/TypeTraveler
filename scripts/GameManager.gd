@@ -2,12 +2,24 @@ extends Node
 
 signal seconds_updated(secs)
 signal level_updated(level)
+signal era_updated(era)
 
 func _ready():
 	randomize()
 
 var seconds = 0
 var age_of_universe_secs = date_to_secs(13800000000, 1, 1, 0, 0, 0)
+
+var era = 0
+const eras = [
+	2000,
+	1750,
+	0,
+	-10_000,
+	-10_000_000,
+	-1_000_000_000,
+	-20_000_000_000,
+]
 
 var secs_increment_base = 10
 var level = 1
@@ -28,6 +40,17 @@ func add_seconds():
 		seconds = age_of_universe_secs
 	seconds = min(seconds, age_of_universe_secs)
 	emit_signal("seconds_updated", seconds)
+
+	var years = (start_secs - seconds) / 31104000
+	var new_era = 0
+	for i in eras.size():
+		if years >= eras[i]:
+			new_era = i
+			break
+	if new_era != era:
+		era = new_era
+		emit_signal("era_updated", era)
+
 
 var start_secs = date_to_secs(2022, 9, 15, 12, 0, 0)
 

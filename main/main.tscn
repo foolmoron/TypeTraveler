@@ -28,6 +28,7 @@ current = true
 position = Vector2( 0, 799 )
 script = ExtResource( 1 )
 spacing_y = 132
+special_freq = 20
 
 [node name="Tiles" type="Node2D" parent="TileContainer"]
 
@@ -129,8 +130,8 @@ valign = 1
 [node name="EveryBar" parent="." instance=ExtResource( 2 )]
 margin_top = 48.0
 margin_bottom = 48.0
-time_left_initial = 6.0
-time_left_final = 3.0
+time_left_initial = 8.0
+time_left_final = 16.0
 
 [node name="TimeLabel" type="Label" parent="."]
 margin_right = 4000.0
