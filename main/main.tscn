@@ -649,4 +649,19 @@ __meta__ = {
 "_editor_description_": ""
 }
 
+[node name="Letterbox" type="Node2D" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Letterbox"]
+margin_left = -508.0
+margin_top = -775.0
+margin_right = 1165.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="Letterbox"]
+margin_left = -573.0
+margin_top = 800.0
+margin_right = 1195.0
+margin_bottom = 1492.0
+color = Color( 0, 0, 0, 1 )
+
 [connection signal="pressed" from="TileContainer/MistakeButton" to="TileContainer" method="_on_MistakeButton_pressed"]

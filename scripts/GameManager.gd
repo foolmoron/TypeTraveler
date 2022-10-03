@@ -141,7 +141,7 @@ func report_mistake():
 		file.store_64(best)
 		file.close()
 		$"../Main/TileContainer/Malfunction/Label".text = $"../Main/TileContainer/Malfunction/Label".text.replace("MALFUNCTION", "JOURNEY OVER")
-		$"../Main/TileContainer/ScoreLabel".text = "Seconds lasted:\n%s\n\nBest seconds:\n%s\n\n\nPress ENTER to RESTART" % [with_commas(seconds), with_commas(best)]
+		$"../Main/TileContainer/ScoreLabel".text = "Seconds lasted:\n%s\n\nBest seconds:\n%s\n\n\nENTER/TAP to TRY AGAIN" % [with_commas(seconds), with_commas(best)]
 		$"../Main/TileContainer/MalfunctionAnim".play("GameOver")
 		gameover = true
 
@@ -158,11 +158,15 @@ func with_commas(n: int) -> String:
 	return s
 
 func _input(evt):
-	if not started:
-		if (evt is InputEventKey and evt.pressed) or (evt is InputEventMouseButton and evt.pressed):
+	if (evt is InputEventKey and evt.pressed) or (evt is InputEventMouseButton and evt.pressed):
+		if not started:
 			started = true
 			$"../Main/TileContainer".set_process(true)
 			$"../Main/Start".get_parent().remove_child($"../Main/Start")
+		if gameover and not $"../Main/TileContainer/MalfunctionAnim".is_playing():
+			var _err = get_tree().reload_current_scene()
+			_ready()
+			return
 
 	if gameover and evt is InputEventKey and evt.pressed and evt.scancode == KEY_ENTER:
 		var _err = get_tree().reload_current_scene()
